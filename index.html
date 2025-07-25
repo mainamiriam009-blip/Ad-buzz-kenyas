@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KenyaBuzzTrends - Top Searches</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <header class="bg-white shadow p-4">
+    <h1 class="text-2xl font-bold text-center">🇰🇪 KenyaBuzzTrends</h1>
+    <p class="text-center text-sm text-gray-600">By just_.mainer</p>
+  </header>
+
+  <main class="p-4 max-w-3xl mx-auto">
+    <h2 class="text-xl font-semibold mb-2">🔥 Top Searches Right Now</h2>
+    <ul class="space-y-3" id="trending-list">
+      <li class="bg-white p-3 rounded shadow">Loading trending searches...</li>
+    </ul>
+
+    <div class="mt-6">
+      <h3 class="text-lg font-semibold">🔍 Explore More</h3>
+      <input type="text" placeholder="Search topic..." class="w-full mt-2 p-2 border rounded" />
+    </div>
+
+    <div class="mt-8">
+      <h3 class="text-lg font-semibold">💰 Sponsored</h3>
+      <div class="bg-yellow-100 p-3 rounded">
+        <p>Start your side hustle today with zero capital! <a href="#" class="text-blue-600 underline">Learn how →</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-sm text-gray-600 mt-12 mb-4">
+    &copy; 2025 KenyaBuzzTrends. Powered by just_.mainer.
+  </footer>
+
+  <script>
+    async function loadTrends() {
+      const list = document.getElementById('trending-list');
+      try {
+        const response = await fetch('https://trends.google.com/trends/hottrends/visualize/internal/data');
+        const data = await response.json();
+        list.innerHTML = data.map(item => `<li class="bg-white p-3 rounded shadow">${item}</li>`).join('');
+      } catch (e) {
+        list.innerHTML = '<li class="bg-white p-3 rounded shadow text-red-600">Failed to load trends. Try again later.</li>';
+      }
+    }
+    loadTrends();
+  </script>
+</body>
+</html>
